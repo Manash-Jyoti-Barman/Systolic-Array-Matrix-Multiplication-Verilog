@@ -3,15 +3,11 @@
 ## Project Summary
 Designed and implemented a 2×2 Systolic Array-based Matrix Multiplier in Verilog RTL, utilizing a weight-stationary dataflow architecture where weights remain locally stored within processing elements. The Weights are loaded once and then reused for multiple cycles.
 
----
-
 ## Systolic Array
 - 2×2 grid of Processing Elements (PEs)
 - **Row-wise streaming** of matrix A
 - **Column-wise propagation** of matrix B
 - Partial sums accumulated across pipeline stages
-
----
 
 ## Processing Element (PE) Design
 The Processing Element (PE) is the fundamental building block of the systolic array architecture. Each PE performs a **Multiply-Accumulate (MAC)** operation and enables efficient data propagation across the array.
