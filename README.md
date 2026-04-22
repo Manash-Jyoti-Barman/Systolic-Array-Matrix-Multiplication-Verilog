@@ -9,7 +9,14 @@ Designed and implemented a 2×2 Systolic Array-based Matrix Multiplier in Verilo
 - **Column-wise propagation** of matrix B
 - Partial sums accumulated across pipeline stages
 
-## Processing Element (PE) Design
+systolic2x2 (systolic2x2.v)
+├── PE11 (pe.v)
+├── PE12 (pe.v)
+├── PE21 (pe.v)
+├── PE22 (pe.v)
+└── valid_checker (valid_checker.v)
+
+## Processing Element (PE) 
 The Processing Element (PE) is the fundamental building block of the systolic array architecture. Each PE performs a **Multiply-Accumulate (MAC)** operation and enables efficient data propagation across the array.
 
 ### Functional Description
@@ -33,6 +40,9 @@ Some additional control signaling I used for proper dataflow across the systolic
 - `out_valid` → Output valid signal for weight.
   
 The signals `in_valid` and `out_valid` is used to control dataflow and enable weight-stationary behavior. When `in_valid` is high, weights are loaded into the Processing Elements (PEs) and stored in internal registers. When `in_valid` is low, the stored weights are retained, making them **stationary** and reusable across multiple cycles. The `out_valid` signal from each PE is propagated to the next stage as `in_valid`.
+
+## Valid Checker
+The `valid_checker` module is responsible for generating a reliable valid signal in the systolic array design. It ensures that the output data is considered valid only when all required inputs have been properly propagated through the pipeline.
 
 The dataflow during various cycles are shown below:
 
